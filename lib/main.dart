@@ -13,7 +13,7 @@ void main()=> runApp(MaterialApp(
   theme: ThemeData(
     primaryColor: Colors.deepPurple,
   ),
-  initialRoute: '/',
+  initialRoute: '/map',
   routes: {
     '/':(context)=>Home(),
     '/login':(context)=>Login(),
