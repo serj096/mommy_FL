@@ -10,9 +10,9 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ) {
     final ButtonStyle style = TextButton.styleFrom(backgroundColor: Colors.deepPurple,);
-    return Scaffold(
+    return  Scaffold(
 
       backgroundColor: AppTheme.colors.white,
 
@@ -27,9 +27,8 @@ class _HomeState extends State<Home> {
           style: style,
           onPressed: (){},  child: const Text('1200+',style: TextStyle(color: Colors.white)),)
         ] ),
-      body:
-
-      Column(
+      body:SingleChildScrollView(
+    child: Column(
 
         children: [
           CircleAvatar(
@@ -68,10 +67,7 @@ class _HomeState extends State<Home> {
           ),
           ),
           const SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child:
-
-          ExpansionTile(title: Text('Текущие записи',textAlign: TextAlign.center,style: TextStyle(color: Colors.cyanAccent),),
+            child: ExpansionTile(title: Text('Текущие записи',textAlign: TextAlign.center,style: TextStyle(color: Colors.cyanAccent),),
             collapsedBackgroundColor: Colors.deepPurple,
             backgroundColor: Colors.deepPurple,
             children: [
@@ -143,7 +139,7 @@ class _HomeState extends State<Home> {
 
         ],
 
-      ),
+      ),),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.deepPurpleAccent,
 
