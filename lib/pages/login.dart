@@ -144,11 +144,8 @@ class _LoginScreenState extends State<LoginScreen> {
               width: 570,
               height: 70,
               padding: EdgeInsets.only(top: 20),
-              child: RaisedButton(
-                  color: Colors.purple,
+              child: ElevatedButton(
                   child: Text("Submit", style: TextStyle(color: Colors.white)),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)),
                   onPressed: () {
                     if (auth.fetchCredentials(
                         usernameController.text, passwordController.text)) {
@@ -447,11 +444,8 @@ class _SignupPageContent extends State<SignupPageContent> {
             width: 570,
             height: 70,
             padding: EdgeInsets.only(top: 20),
-            child: RaisedButton(
-                color: Colors.purple,
+            child: ElevatedButton(
                 child: Text("Submit", style: TextStyle(color: Colors.white)),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30)),
                 onPressed: () async {
                   if (kDebugMode) {
                     print(

@@ -1,5 +1,8 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:mommy/theme/app_theme.dart';
+import '../data/UserInfo.dart';
+import '../theme/styles.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -10,161 +13,126 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
+
   Widget build(BuildContext context) {
     final ButtonStyle style = TextButton.styleFrom(backgroundColor: Colors.deepPurple,);
+
+
+
     return Scaffold(
-
       backgroundColor: AppTheme.colors.white,
-
-
       appBar: AppBar(
-        leading: IconButton(onPressed: (){},icon: Icon(Icons.accessible_forward_outlined),),
-          backgroundColor: Colors.deepPurpleAccent,
+          backgroundColor: Colors.blueGrey,
           actions: <Widget>[
-
-        TextButton(
-
-          style: style,
-          onPressed: (){},  child: const Text('1200+',style: TextStyle(color: Colors.white)),)
-        ] ),
+            TextButton(
+              style: style,
+              onPressed: (){},
+              child: const Text('1200+',
+                  style: TextStyle(color: Colors.white)))
+          ]),
       body:
+      SingleChildScrollView(
+        child: Column(
+          children: [
+            Styles().DefaultPadding,
+            CircleAvatar(
+              backgroundColor: Styles().GetRandomColor(),
+              radius: 55.0,
+              child: Text(UserInfo().GetName()[0], style: Styles().BigCycleAvatar ),
+            ),
+            Styles().DefaultPadding,
+            Text("Имя: ${UserInfo().GetName()}", textAlign: TextAlign.center, style: Styles().AllocationText),
+            Styles().DefaultPadding,
+            Text("Телефон: ${UserInfo().GetPhone()}",textAlign: TextAlign.left,),
+            Text("Социальные сети: ", textAlign: TextAlign.left),
+            Styles().DefaultPadding,
 
-      Column(
+            const SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child:
+              ExpansionTile(title: Text('Текущие записи',textAlign: TextAlign.center,style: TextStyle(color: Colors.cyanAccent),),
+                  collapsedBackgroundColor: Colors.deepPurple,
+                  backgroundColor: Colors.deepPurple,
+                  children: [
+                    ListTile(title: MyStatelessWidgetH(),
 
-        children: [
-          CircleAvatar(
-            backgroundImage: NetworkImage('https://ke-images.servicecdn.ru/c4ci55m8hikadvice9og/original.jpg',),
-            radius: 100,
-          ),
-        Padding(padding: EdgeInsets.all(10)),
-        Padding(padding: EdgeInsets.only(left: 20,right: 20),
-        child: SizedBox(
-          child: Text('Your name',textAlign: TextAlign.center, style: TextStyle(color: Colors.cyanAccent,fontSize: 30),),),),
-          Padding(padding: EdgeInsets.all(10)),
-
-          SizedBox(
-            width: 400,
-            height: 100,
-
-            child:
-          Row(
-            children:[
-             // Padding(padding: ),
-              Column(
-
-                children:[Text('Telephone',style: TextStyle(fontSize: 20,color: Colors.cyanAccent),),
-                  Text('Social network',style: TextStyle(fontSize: 20,color: Colors.cyanAccent),),]
-                
-
+                    ),
+                    ListTile(title: MyStatelessWidgetH1(),)
+                  ]
               ),
-              Column(
+            ),
+            Padding(padding: EdgeInsets.all(10)),
+            SizedBox(
+
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton( onPressed:(){},style: ElevatedButton.styleFrom(
+                primary: AppTheme.colors.blueButtoncolor,
+              ), child: Row(
+
+                mainAxisSize: MainAxisSize.min,
+
                 children: [
-                  Text('+7************',style: TextStyle(fontSize: 20,color: Colors.cyanAccent),),
-                  Text('Social',style: TextStyle(fontSize: 20,color: Colors.cyanAccent),)
-
+                  Text('История записей',style: TextStyle(color: Colors.cyanAccent),),
+                  SizedBox(
+                    width: 100,
+                  ),
+                  Icon(Icons.add_circle),
                 ],
-              )
-            ]
-          ),
-          ),
-          const SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child:
+              ),),
+            ),
+            Padding(padding: EdgeInsets.all(10)),
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child:
+              ElevatedButton(onPressed:(){},style: ElevatedButton.styleFrom(
+                primary: Colors.deepPurple,
+              ), child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('Любимые специалисты',style: TextStyle(color: Colors.cyanAccent),),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Icon(Icons.add_circle),
+                ],
+              ),),
+            ),
+            Padding(padding: EdgeInsets.all(10)),
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child:
+              ElevatedButton(onPressed:(){}, style:ElevatedButton.styleFrom(
+                  primary: Colors.deepPurple
+              ),child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('Разместить услугу',style: TextStyle(color: Colors.cyanAccent),),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Icon(Icons.add_circle),
+                ],
+              ),),
+            ),
+          ],),),
 
-          ExpansionTile(title: Text('Текущие записи',textAlign: TextAlign.center,style: TextStyle(color: Colors.cyanAccent),),
-            collapsedBackgroundColor: Colors.deepPurple,
-            backgroundColor: Colors.deepPurple,
-            children: [
-              ListTile(title: MyStatelessWidgetH(),
-
-              ),
-              ListTile(title: MyStatelessWidgetH1(),)
-            ]
-          ),
-    ),
-        Padding(padding: EdgeInsets.all(10)),
-
-
-        SizedBox(
-
-          width: double.infinity,
-           height: 50,
-           child: ElevatedButton( onPressed:(){},style: ElevatedButton.styleFrom(
-             primary: AppTheme.colors.blueButtoncolor,
-           ), child: Row(
-
-             mainAxisSize: MainAxisSize.min,
-
-             children: [
-               Text('История записей',style: TextStyle(color: Colors.cyanAccent),),
-               SizedBox(
-                 width: 100,
-               ),
-               Icon(Icons.add_circle),
-             ],
-           ),),
-        ),
-          Padding(padding: EdgeInsets.all(10)),
-        SizedBox(
-          width: double.infinity,
-          height: 50,
-          child:
-          ElevatedButton(onPressed:(){},style: ElevatedButton.styleFrom(
-            primary: Colors.deepPurple,
-          ), child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('Любимые специалисты',style: TextStyle(color: Colors.cyanAccent),),
-              SizedBox(
-                width: 5,
-              ),
-              Icon(Icons.add_circle),
-            ],
-          ),),
-),
-          Padding(padding: EdgeInsets.all(10)),
-    SizedBox(
-    width: double.infinity,
-    height: 50,
-    child:
-          ElevatedButton(onPressed:(){}, style:ElevatedButton.styleFrom(
-            primary: Colors.deepPurple
-          ),child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('Разместить услугу',style: TextStyle(color: Colors.cyanAccent),),
-              SizedBox(
-                width: 5,
-              ),
-              Icon(Icons.add_circle),
-            ],
-          ),),
-    ),
-
-        ],
-
-      ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.deepPurpleAccent,
-
-          currentIndex: 2,
-
-          items:[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.message_rounded,color: Colors.purpleAccent,),
-          label: 'Message',backgroundColor: Colors.purple,
-        ),
-
-        BottomNavigationBarItem(
-          icon: Icon(Icons.settings_rounded,color: Colors.purpleAccent,),
-          label: 'Settings',backgroundColor: Colors.purple,
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home_rounded,color: Colors.purpleAccent,),
-          label: 'Home',backgroundColor: Colors.purple,
-        ),
+        currentIndex: 2,
+        items:[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.message_rounded,color: Colors.purpleAccent,),
+            label: 'Message',backgroundColor: Colors.purple),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings_rounded,color: Colors.purpleAccent,),
+            label: 'Settings',backgroundColor: Colors.purple),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_rounded,color: Colors.purpleAccent,),
+            label: 'Home',backgroundColor: Colors.purple,),
       ]),
-
     );
   }
 }
