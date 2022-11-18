@@ -14,6 +14,7 @@ class UserInfo{
   String? FullName;
 
   String GetName(){
+    return "Василий Сергеевич";
     if(FullName == null)
     {
       FullName = "${FirstName??""} ${SurName??""} ${Patronymyc?[0]??""}.";
