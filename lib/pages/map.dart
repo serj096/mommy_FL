@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/plugin_api.dart';
 import 'package:open_street_map_search_and_pick/open_street_map_search_and_pick.dart';
 
+import '../theme/styles.dart';
+
 
 
 class MapOur extends StatefulWidget {
@@ -16,10 +18,7 @@ class _MapOurState extends State<MapOur> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Categories'),
-
-      ),
+      appBar: Styles().GetDefaultAppBar(context, false, "Категории"),
       body: OpenStreetMapSearchAndPick(
           center: LatLong(23, 89),
           buttonColor: Colors.blue,
