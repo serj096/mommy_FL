@@ -16,7 +16,6 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
 
-
     return Container(
       alignment: Alignment.center,
         decoration:  BoxDecoration(
