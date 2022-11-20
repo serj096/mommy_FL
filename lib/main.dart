@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mommy/pages/YourName.dart';
 import 'package:mommy/pages/home.dart';
 import 'package:mommy/pages/login.dart';
 import 'package:mommy/pages/categories.dart';
@@ -9,11 +10,12 @@ void main()=> runApp(MaterialApp(
   theme: ThemeData(
     primaryColor: Colors.deepPurple,
   ),
-  initialRoute: '/',
+  initialRoute: '/yourName',
   routes: {
     '/':(context)=>Home(),
     '/login':(context)=>Login(),
     '/categories':(context)=>Categories(),
+    '/yourName':(context)=>YourName(),
     '/map':(context)=>MapOur(),
     '/mySpec':(context)=>MySpec(),
 
