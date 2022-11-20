@@ -13,58 +13,66 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
-
   Widget build(BuildContext context) {
-    final ButtonStyle style = TextButton.styleFrom(backgroundColor: Colors.deepPurple,);
+    var width = MediaQuery.of(context).size.width;
 
 
-
-    return Scaffold(
-      backgroundColor: AppTheme.colors.white,
-      appBar: Styles().GetDefaultAppBar(context, true, "Личный кабинет"),
-      body:
-      SingleChildScrollView(
-        child: Column(
-          children: [
-            Styles().DefaultPadding,
-            Styles().GetCircleAvatar(context, circleAwatarSize.big),
-            Styles().DefaultPadding,
-            Text("Имя: ${UserInfo().GetName()}", textAlign: TextAlign.center, style: Styles().AllocationText),
-            Styles().DefaultPadding,
-            Text("Телефон: ${UserInfo().GetPhone()}",textAlign: TextAlign.left,),
-            Text("Социальные сети: ", textAlign: TextAlign.left),
-            Styles().DefaultPadding,
-            Styles().GetDefaultScrollView( GetLW(), "Текущие записи"),
-            Styles().DefaultPadding,
-            Styles().GetDefaultButton("История записей", () {}),
-            Styles().DefaultPadding,
-            Styles().GetDefaultButton("Любимые специалисты", () {}),
-            Styles().DefaultPadding,
-            Styles().GetDefaultButton("Разместить услугу", () {}),
-          ],),),
-
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.deepPurpleAccent,
-        currentIndex: 2,
-        items:[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message_rounded,color: Colors.purpleAccent,),
-            label: 'Message',backgroundColor: Colors.purple),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings_rounded,color: Colors.purpleAccent,),
-            label: 'Settings',backgroundColor: Colors.purple),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_rounded,color: Colors.purpleAccent,),
-            label: 'Home',backgroundColor: Colors.purple,),
-      ]),
-    );
+    return Container(
+      alignment: Alignment.center,
+        decoration:  BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [AppTheme.colors.baseUpBackground, AppTheme.colors.baseDownBackground])),
+      child: Scaffold(
+          appBar: Styles.widgets.GetDefaultAppBar(context, true, "Личный кабинет"),
+          backgroundColor: Colors.transparent,
+          body:Center(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Styles.DefaultPadding,
+                  Styles.widgets.GetCircleAvatar(context, circleAwatarSize.big),
+                  Styles.DefaultPadding,
+                  Text("${UserInfo().GetName()}", textAlign: TextAlign.center, style: Styles.text.AllocationText),
+                  Container(
+                      alignment: Alignment.centerLeft,
+                      width: width * 0.75,
+                      padding: EdgeInsets.fromLTRB(0, 8, 0, 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [Text("Телефон: ${UserInfo().GetPhone()}",textAlign: TextAlign.left, style: Styles.text.InformationText),
+                          Text("Социальные сети: ", textAlign: TextAlign.left, style: Styles.text.InformationText)],
+                      )),
+                  Styles.widgets.GetDefaultScrollView( context, GetLW(), "Текущие записи: ${GetLW().length}"),
+                  Styles.DefaultPadding,
+                  Styles.widgets.GetDefaultButton(context,"История записей", () {}),
+                  Styles.DefaultPadding,
+                  Styles.widgets.GetDefaultButton(context,"Любимые специалисты", () {}),
+                  Styles.DefaultPadding,
+                  Styles.widgets.GetDefaultButton(context,"Разместить услугу", () {}),
+                ],
+              ),
+            ),
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+              backgroundColor: AppTheme.colors.baseDownBackground,
+              currentIndex: 2,
+              items:[
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.message_rounded,color: Color.fromRGBO(177, 175, 250, 1)),
+                    label: 'Message',backgroundColor: Colors.white),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.settings_rounded,color: Color.fromRGBO(177, 175, 250, 1)),
+                    label: 'Settings',backgroundColor: Colors.white),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home_rounded,color: Color.fromRGBO(177, 175, 250, 1)),
+                  label: 'Home',backgroundColor: Colors.white,),
+              ])));
   }
 }
 
-List<Widget> GetLW(){
-  var a = [GetWid(), GetWid(), GetWid(), GetWid()];
-  return a;
-}
+List<Widget> GetLW()=> [GetWid(), GetWid(), GetWid(), GetWid()];
 
 Widget GetWid(){
   return Center(

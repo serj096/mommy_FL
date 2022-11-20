@@ -8,6 +8,9 @@ class AppColors{
   final blueButtoncolor = const Color.fromRGBO(78, 74, 156, 1);
   final homeOneColor = const Color.fromRGBO(21, 19, 41, 1);
   final homeSecondColor = const Color.fromRGBO(16, 15, 31, 1);
+  final baseUpBackground = const Color.fromRGBO(53, 48, 104, 1);
+  final baseDownBackground = const Color.fromRGBO(40, 38, 78,1);
+
 
   const AppColors();
 }
