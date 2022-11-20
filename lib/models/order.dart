@@ -5,21 +5,27 @@ part 'order.g.dart';
 @JsonSerializable()
 class Order
 {
+  @JsonKey(name: 'ShopId')
   @JsonKey(required: true)
   late int shopId;
 
   @JsonKey(required: true)
+  @JsonKey(name: 'PayType')
   late Payment payType;
 
+  @JsonKey(name: 'IsCompleted')
   @JsonKey(required: true)
   late bool isCompleted;
 
+  @JsonKey(name: 'Time')
   @JsonKey(required: true)
   late DateTime time;
 
+  @JsonKey(name: 'Location')
   @JsonKey(required: true)
   late Place location;
 
+  @JsonKey(name: 'Services')
   @JsonKey(required: true)
   late List<int> services;
 

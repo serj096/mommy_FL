@@ -9,32 +9,25 @@ part of 'order.dart';
 Order _$OrderFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const [
-      'shopId',
-      'payType',
-      'isCompleted',
-      'time',
-      'location',
-      'services'
-    ],
+    requiredKeys: const ['payType'],
   );
   return Order(
-    json['shopId'] as int,
+    json['ShopId'] as int,
     $enumDecode(_$PaymentEnumMap, json['payType']),
-    json['isCompleted'] as bool,
-    DateTime.parse(json['time'] as String),
-    $enumDecode(_$PlaceEnumMap, json['location']),
-    (json['services'] as List<dynamic>).map((e) => e as int).toList(),
+    json['IsCompleted'] as bool,
+    DateTime.parse(json['Time'] as String),
+    $enumDecode(_$PlaceEnumMap, json['Location']),
+    (json['Services'] as List<dynamic>).map((e) => e as int).toList(),
   );
 }
 
 Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
-      'shopId': instance.shopId,
+      'ShopId': instance.shopId,
       'payType': _$PaymentEnumMap[instance.payType]!,
-      'isCompleted': instance.isCompleted,
-      'time': instance.time.toIso8601String(),
-      'location': _$PlaceEnumMap[instance.location]!,
-      'services': instance.services,
+      'IsCompleted': instance.isCompleted,
+      'Time': instance.time.toIso8601String(),
+      'Location': _$PlaceEnumMap[instance.location]!,
+      'Services': instance.services,
     };
 
 const _$PaymentEnumMap = {

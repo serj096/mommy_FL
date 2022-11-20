@@ -6,18 +6,12 @@ part of 'category.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Category _$CategoryFromJson(Map<String, dynamic> json) {
-  $checkKeys(
-    json,
-    requiredKeys: const ['id', 'name'],
-  );
-  return Category(
-    json['id'] as int,
-    json['name'] as String?,
-  );
-}
+Category _$CategoryFromJson(Map<String, dynamic> json) => Category(
+      json['Id'] as int,
+      json['Name'] as String?,
+    );
 
 Map<String, dynamic> _$CategoryToJson(Category instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
+      'Id': instance.id,
+      'Name': instance.name,
     };
