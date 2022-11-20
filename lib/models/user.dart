@@ -5,27 +5,34 @@ part 'user.g.dart';
 @JsonSerializable()
 class User
 {
+  @JsonKey(name: 'Phone')
   @JsonKey(required: true)
   late final String phone;
 
+  @JsonKey(name: 'FirstName')
   @JsonKey(required: true)
   late String firstName;
 
+  @JsonKey(name: 'SurName')
   @JsonKey(required: false)
   @JsonKey(defaultValue: "")
   late String surName;
 
+  @JsonKey(name: 'Patronymic')
   @JsonKey(required: false)
   @JsonKey(defaultValue: "")
   late String patronymic;
 
+  @JsonKey(name: 'IsWoman')
   @JsonKey(required: true)
   late bool isWoman;
 
+  @JsonKey(name: 'City')
   @JsonKey(required: false)
   @JsonKey(defaultValue: "")
   late String city;
 
+  @JsonKey(name: 'Address')
   @JsonKey(required: false)
   @JsonKey(defaultValue: "")
   late String address;

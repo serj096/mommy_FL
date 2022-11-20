@@ -5,9 +5,11 @@ part 'category.g.dart';
 @JsonSerializable()
 class Category
 {
+  @JsonKey(name: 'Id')
   @JsonKey(required: true)
   late int id;
 
+  @JsonKey(name: 'Name')
   @JsonKey(required: true)
   late String? name;
 

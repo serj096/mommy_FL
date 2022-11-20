@@ -6,22 +6,18 @@ part of 'service.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Service _$ServiceFromJson(Map<String, dynamic> json) {
-  $checkKeys(
-    json,
-    requiredKeys: const ['categoryId', 'name', 'description', 'price'],
-  );
-  return Service(
-    json['categoryId'] as int,
-    json['name'] as String,
-    json['description'] as String,
-    json['price'] as int,
-  );
-}
+Service _$ServiceFromJson(Map<String, dynamic> json) => Service(
+      json['Id'] as int,
+      json['CategoryId'] as int,
+      json['Name'] as String,
+      json['Description'] as String,
+      json['Price'] as int,
+    );
 
 Map<String, dynamic> _$ServiceToJson(Service instance) => <String, dynamic>{
-      'categoryId': instance.categoryId,
-      'name': instance.name,
-      'description': instance.description,
-      'price': instance.price,
+      'Id': instance.id,
+      'CategoryId': instance.categoryId,
+      'Name': instance.name,
+      'Description': instance.description,
+      'Price': instance.price,
     };
