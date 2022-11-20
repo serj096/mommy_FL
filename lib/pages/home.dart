@@ -17,8 +17,6 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final ButtonStyle style = TextButton.styleFrom(backgroundColor: Colors.deepPurple,);
 
-
-
     return Scaffold(
       backgroundColor: AppTheme.colors.white,
       appBar: Styles().GetDefaultAppBar(context, true, "Личный кабинет"),
