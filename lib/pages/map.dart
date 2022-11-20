@@ -18,9 +18,9 @@ class _MapOurState extends State<MapOur> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: Styles().GetDefaultAppBar(context, false, "Категории"),
+      appBar: Styles.widgets.GetDefaultAppBar(context, false, "Категории"),
       body: OpenStreetMapSearchAndPick(
-          center: LatLong(23, 89),
+          center: LatLong(55.7522, 37.6156),
           buttonColor: Colors.blue,
           buttonText: 'Set Current Location',
           onPicked: (pickedData) {
