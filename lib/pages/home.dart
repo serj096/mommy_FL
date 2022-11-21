@@ -17,103 +17,167 @@ class _HomeState extends State<Home> {
     var width = MediaQuery.of(context).size.width;
 
     return Container(
-      alignment: Alignment.center,
-        decoration:  BoxDecoration(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [AppTheme.colors.baseUpBackground, AppTheme.colors.baseDownBackground])),
-      child: Scaffold(
-          appBar: Styles.widgets.GetDefaultAppBar(context, true, "Личный кабинет"),
-          backgroundColor: Colors.transparent,
-          body: FutureBuilder(
-            future: HomePageData.getData(),
-            builder: (context, AsyncSnapshot<HomePageData> snapshot) {
-              if(!snapshot.hasData) {
-                return const Center(child: CircularProgressIndicator());
-              }
+                colors: [
+              AppTheme.colors.baseUpBackground,
+              AppTheme.colors.baseDownBackground
+            ])),
+        child: Scaffold(
+            appBar: Styles.widgets
+                .GetDefaultAppBar(context, true, "Личный кабинет"),
+            backgroundColor: Colors.transparent,
+            body: FutureBuilder(
+                future: HomePageData.getData(),
+                builder: (context, AsyncSnapshot<HomePageData> snapshot) {
+                  if (!snapshot.hasData) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
 
-              final User user = snapshot.data!.user;
-              final List<Order> orders = snapshot.data!.orders;
+                  // todo
+                  // Async method error handling
 
-              return Center(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Styles.DefaultPadding,
-                      Styles.widgets.GetCircleAvatar(context, circleAwatarSize.big),
-                      Styles.DefaultPadding,
-                      Text(user.fullName(), textAlign: TextAlign.center, style: Styles.text.AllocationText),
-                      Container(
-                          alignment: Alignment.centerLeft,
-                          width: width * 0.75,
-                          padding: EdgeInsets.fromLTRB(0, 8, 0, 16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [Text("Телефон: ${user.phone}",textAlign: TextAlign.left, style: Styles.text.InformationText),
-                              Text("Социальные сети: ", textAlign: TextAlign.left, style: Styles.text.InformationText)],
-                          )),
-                      Styles.widgets.GetDefaultScrollView( context, GetLW(), "Текущие записи: ${GetLW().length}"),
-                      Styles.DefaultPadding,
-                      Styles.widgets.GetDefaultButton(context,"История записей", () {}),
-                      Styles.DefaultPadding,
-                      Styles.widgets.GetDefaultButton(context,"Любимые специалисты", () {}),
-                      Styles.DefaultPadding,
-                      Styles.widgets.GetDefaultButton(context,"Разместить услугу", () {}),
-                    ],
+                  final User user = snapshot.data!.user;
+                  final List<Order> orders = snapshot.data!.orders;
+
+                  final List<Widget> ordersWidgets = getLW(orders);
+
+                  return Center(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Styles.DefaultPadding,
+                          Styles.widgets
+                              .GetCircleAvatar(context, circleAwatarSize.big),
+                          Styles.DefaultPadding,
+                          Text(user.fullName(),
+                              textAlign: TextAlign.center,
+                              style: Styles.text.AllocationText),
+                          Container(
+                              alignment: Alignment.centerLeft,
+                              width: width * 0.75,
+                              padding: EdgeInsets.fromLTRB(0, 8, 0, 16),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Телефон: ${user.phone}",
+                                      textAlign: TextAlign.left,
+                                      style: Styles.text.InformationText),
+                                  Text("Социальные сети: ",
+                                      textAlign: TextAlign.left,
+                                      style: Styles.text.InformationText)
+                                ],
+                              )),
+                          Styles.widgets.GetDefaultScrollView(
+                              context,
+                              ordersWidgets,
+                              "Текущие записи: ${ordersWidgets.length}"),
+                          Styles.DefaultPadding,
+                          Styles.widgets.GetDefaultButton(
+                              context, "История записей", () {}),
+                          Styles.DefaultPadding,
+                          Styles.widgets.GetDefaultButton(
+                              context, "Любимые специалисты", () {}),
+                          Styles.DefaultPadding,
+                          Styles.widgets.GetDefaultButton(
+                              context, "Разместить услугу", () {}),
+                        ],
+                      ),
+                    ),
+                  );
+                }),
+            bottomNavigationBar: BottomNavigationBar(
+                backgroundColor: AppTheme.colors.baseDownBackground,
+                currentIndex: 2,
+                items: [
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.message_rounded,
+                          color: Color.fromRGBO(177, 175, 250, 1)),
+                      label: 'Message',
+                      backgroundColor: Colors.white),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.settings_rounded,
+                          color: Color.fromRGBO(177, 175, 250, 1)),
+                      label: 'Settings',
+                      backgroundColor: Colors.white),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.home_rounded,
+                        color: Color.fromRGBO(177, 175, 250, 1)),
+                    label: 'Home',
+                    backgroundColor: Colors.white,
                   ),
-                ),
-              );
-            }
-          ),
-          bottomNavigationBar: BottomNavigationBar(
-              backgroundColor: AppTheme.colors.baseDownBackground,
-              currentIndex: 2,
-              items:[
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.message_rounded,color: Color.fromRGBO(177, 175, 250, 1)),
-                    label: 'Message',backgroundColor: Colors.white),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.settings_rounded,color: Color.fromRGBO(177, 175, 250, 1)),
-                    label: 'Settings',backgroundColor: Colors.white),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home_rounded,color: Color.fromRGBO(177, 175, 250, 1)),
-                  label: 'Home',backgroundColor: Colors.white,),
-              ])));
+                ])));
   }
 }
 
-List<Widget> GetLW()=> [GetWid(), GetWid(), GetWid(), GetWid()];
+List<Widget> getLW(List<Order> orders) {
+  var result = <Widget>[];
 
-Widget GetWid(){
+  for (Order o in orders) {
+    result.add(getWid(o));
+  }
+
+  return result;
+}
+
+Widget getWid(Order order) {
   return Center(
-    child: Card(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          const ListTile(
-            leading: Text('lol') ,
+    child: FutureBuilder(
+      future: OrderContainerData.getData(order),
+      builder: (context, AsyncSnapshot<OrderContainerData> snapshot) {
+        if (!snapshot.hasData) {
+          return const CircularProgressIndicator();
+        }
 
-            title: Text('The Enchanted Nightingale'),
-            subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+        // todo
+        // Async method error handling
+
+        Shop shop = snapshot.data!.shop;
+        List<Service> services = snapshot.data!.services;
+
+        String strServices = "";
+        if (services.isNotEmpty) {
+          strServices += services[0].name;
+          for (int i = 1; i < services.length; i++) {
+            strServices += ", ${services[i].name}";
+          }
+        }
+
+        return Card(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              TextButton(
-                child: const Text('Связаться со специалистом'),
-                onPressed: () {/* ... */},
+              ListTile(
+                leading: Text(shop.name),
+                title: Text(strServices),
+                subtitle: Text(shop.description),
               ),
-              const SizedBox(width: 8),
-              TextButton(
-                child: const Text('Отменить запись'),
-                onPressed: () {/* ... */},
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  TextButton(
+                    child: const Text('Связаться со специалистом'),
+                    onPressed: () {
+                      /* ... */
+                    },
+                  ),
+                  const SizedBox(width: 8),
+                  TextButton(
+                    child: const Text('Отменить запись'),
+                    onPressed: () {
+                      /* ... */
+                    },
+                  ),
+                  const SizedBox(width: 8),
+                ],
               ),
-              const SizedBox(width: 8),
             ],
           ),
-        ],
-      ),
+        );
+      },
     ),
   );
 }
@@ -127,10 +191,28 @@ class HomePageData {
   static Future<HomePageData> getData() async {
     HomePageData result = HomePageData._privateConstructor();
     result.user = await DataAccessor.instance.userDataAccess.getInfo();
-    result.orders = await DataAccessor.instance.orderDataAccess.getOrders();
-    await Future.delayed(const Duration(seconds: 3));
+    result.orders = await DataAccessor.instance.orderDataAccess.getCurrentOrders();
+    await Future.delayed(const Duration(seconds: 2));
     return result;
   }
 }
 
+class OrderContainerData {
+  late Shop shop;
+  late List<Service> services;
 
+  OrderContainerData._privateConstructor();
+
+  static Future<OrderContainerData> getData(Order order) async {
+    OrderContainerData result = OrderContainerData._privateConstructor();
+    result.shop = await DataAccessor.instance.shopDataAccess.getShop(order.shopId);
+    result.services = <Service>[];
+    for (Service s in await DataAccessor.instance.shopDataAccess.getServices(order.shopId)) {
+      if (order.services.contains(s.id)) {
+        result.services.add(s);
+      }
+    }
+    await Future.delayed(Duration(seconds: order.shopId * 2));
+    return result;
+  }
+}

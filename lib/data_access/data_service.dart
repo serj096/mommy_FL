@@ -25,13 +25,16 @@ abstract class CategoryDataService
 abstract class ShopDataService
 {
   Future<List<Shop>> getShops(int categoryId, Point<double> pt, double distance);
-  Future<Shop> getShop(int id);
-  Future<ShopInfo> getShopInfo(int id);
+  Future<Shop> getShop(int shopId);
+  Future<List<Service>> getServices(int shopId);
+  Future<Service> getService(int shopId, int serviceId);
+  Future<HolidayInfo> getHolidays(int shopId);
 }
 
 abstract class OrderDataService
 {
-  Future<List<Order>> getOrders();
+  Future<List<Order>> getCurrentOrders();
+  Future<List<Order>> getOrdersHistory(int fromId);
   Future<void> addOrder(Order order);
 }
 
