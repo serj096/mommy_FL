@@ -1,8 +1,8 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:mommy/data_access/data_accessor.dart';
 import 'package:mommy/theme/app_theme.dart';
-import '../data/UserInfo.dart';
 import '../theme/styles.dart';
+import '../models/index.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -26,33 +26,45 @@ class _HomeState extends State<Home> {
       child: Scaffold(
           appBar: Styles.widgets.GetDefaultAppBar(context, true, "Личный кабинет"),
           backgroundColor: Colors.transparent,
-          body:Center(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Styles.DefaultPadding,
-                  Styles.widgets.GetCircleAvatar(context, circleAwatarSize.big),
-                  Styles.DefaultPadding,
-                  Text("${UserInfo().GetName()}", textAlign: TextAlign.center, style: Styles.text.AllocationText),
-                  Container(
-                      alignment: Alignment.centerLeft,
-                      width: width * 0.75,
-                      padding: EdgeInsets.fromLTRB(0, 8, 0, 16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [Text("Телефон: ${UserInfo().GetPhone()}",textAlign: TextAlign.left, style: Styles.text.InformationText),
-                          Text("Социальные сети: ", textAlign: TextAlign.left, style: Styles.text.InformationText)],
-                      )),
-                  Styles.widgets.GetDefaultScrollView( context, GetLW(), "Текущие записи: ${GetLW().length}"),
-                  Styles.DefaultPadding,
-                  Styles.widgets.GetDefaultButton(context,"История записей", () {}),
-                  Styles.DefaultPadding,
-                  Styles.widgets.GetDefaultButton(context,"Любимые специалисты", () {}),
-                  Styles.DefaultPadding,
-                  Styles.widgets.GetDefaultButton(context,"Разместить услугу", () {}),
-                ],
-              ),
-            ),
+          body: FutureBuilder(
+            future: HomePageData.getData(),
+            builder: (context, AsyncSnapshot<HomePageData> snapshot) {
+              if(!snapshot.hasData) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+              final User user = snapshot.data!.user;
+              final List<Order> orders = snapshot.data!.orders;
+
+              return Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Styles.DefaultPadding,
+                      Styles.widgets.GetCircleAvatar(context, circleAwatarSize.big),
+                      Styles.DefaultPadding,
+                      Text(user.fullName(), textAlign: TextAlign.center, style: Styles.text.AllocationText),
+                      Container(
+                          alignment: Alignment.centerLeft,
+                          width: width * 0.75,
+                          padding: EdgeInsets.fromLTRB(0, 8, 0, 16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [Text("Телефон: ${user.phone}",textAlign: TextAlign.left, style: Styles.text.InformationText),
+                              Text("Социальные сети: ", textAlign: TextAlign.left, style: Styles.text.InformationText)],
+                          )),
+                      Styles.widgets.GetDefaultScrollView( context, GetLW(), "Текущие записи: ${GetLW().length}"),
+                      Styles.DefaultPadding,
+                      Styles.widgets.GetDefaultButton(context,"История записей", () {}),
+                      Styles.DefaultPadding,
+                      Styles.widgets.GetDefaultButton(context,"Любимые специалисты", () {}),
+                      Styles.DefaultPadding,
+                      Styles.widgets.GetDefaultButton(context,"Разместить услугу", () {}),
+                    ],
+                  ),
+                ),
+              );
+            }
           ),
           bottomNavigationBar: BottomNavigationBar(
               backgroundColor: AppTheme.colors.baseDownBackground,
@@ -104,6 +116,21 @@ Widget GetWid(){
       ),
     ),
   );
+}
+
+class HomePageData {
+  late User user;
+  late List<Order> orders;
+
+  HomePageData._privateConstructor();
+
+  static Future<HomePageData> getData() async {
+    HomePageData result = HomePageData._privateConstructor();
+    result.user = await DataAccessor.instance.userDataAccess.getInfo();
+    result.orders = await DataAccessor.instance.orderDataAccess.getOrders();
+    await Future.delayed(const Duration(seconds: 3));
+    return result;
+  }
 }
 
 

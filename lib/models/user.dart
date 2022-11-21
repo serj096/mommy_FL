@@ -44,4 +44,6 @@ class User
   Map<String, dynamic> toJson() => _$UserToJson(this);
 
   String firstLetter() => firstName.substring(0,1);
+
+  String fullName() => surName + firstName + patronymic;
 }
