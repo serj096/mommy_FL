@@ -90,14 +90,15 @@ class DefaultWidgets{
   }
 
   Widget GetCircleAvatar(BuildContext context, circleAwatarSize size){
+    var width = MediaQuery.of(context).size.height;
     return GestureDetector(
         onTap: (){ size == circleAwatarSize.small? Navigator.pushNamed(context, '/') : null;},
         child: CircleAvatar(
             backgroundColor: Colors.white,
-            radius: size == circleAwatarSize.big? 55 : 27,
+            radius: size == circleAwatarSize.big? width / 10 : 23,
             child: CircleAvatar(
                 backgroundColor: Color.fromRGBO(76, 74, 157,1),
-                radius: size == circleAwatarSize.big? 50 : 22,
+                radius: size == circleAwatarSize.big? width / 10.1 : 20,
                 child: Text(UserInfo().GetName()[0], style: GetCircleAvatarTextStyle(size) )
             )));
   }
