@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'converters.dart';
-import 'service.dart';
 import 'dart:math';
 
 part 'shop.g.dart';
@@ -33,37 +32,22 @@ class Shop
   @CustomDoublePointJsonConverter()
   late Point<double> coords;
 
-  Shop(this.id, this.name, this.rating, this.city, this.address, this.coords);
+  @JsonKey(name: 'Description')
+  @JsonKey(required: true)
+  late String description;
+
+  Shop(this.id, this.name, this.rating, this.city, this.address, this.coords, this.description);
 
   factory Shop.fromJson(Map<String, dynamic> json) => _$ShopFromJson(json);
 
   Map<String, dynamic> toJson() => _$ShopToJson(this);
 }
 
-@JsonSerializable()
 class ShopInfo
 {
-  @JsonKey(name: 'Description')
-  @JsonKey(required: true)
-  late String description;
-
-  @JsonKey(name: 'Holidays')
-  @JsonKey(required: true)
-  late HolidayInfo holidays;
-
-  @JsonKey(name: 'Services')
-  @JsonKey(required: true)
-  late List<Service> services;
-
   // todo
   // WorkPhoto
   // Certificates
-
-  ShopInfo(this.description, this.holidays, this.services);
-
-  factory ShopInfo.fromJson(Map<String, dynamic> json) => _$ShopInfoFromJson(json);
-
-  Map<String, dynamic> toJson() => _$ShopInfoToJson(this);
 }
 
 @JsonSerializable()

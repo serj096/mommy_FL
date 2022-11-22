@@ -10,7 +10,7 @@ void main()=> runApp(MaterialApp(
   theme: ThemeData(
     primaryColor: Colors.deepPurple,
   ),
-  initialRoute: '/yourName',
+  initialRoute: '/',
   routes: {
     '/':(context)=>Home(),
     '/login':(context)=>Login(),

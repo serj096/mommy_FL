@@ -43,5 +43,21 @@ class User
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
 
-  String firstLetter() => firstName.substring(0,1);
+  String firstLetter() => firstName[0].toUpperCase();
+
+  String fullName() {
+    String result = "";
+
+    if (surName != "") {
+      result += "$surName ";
+    }
+
+    result += firstName;
+
+    if (patronymic != "") {
+      result += " $patronymic";
+    }
+
+    return result;
+  }
 }

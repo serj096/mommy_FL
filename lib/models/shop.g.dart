@@ -14,6 +14,7 @@ Shop _$ShopFromJson(Map<String, dynamic> json) => Shop(
       json['Address'] as String,
       const CustomDoublePointJsonConverter()
           .fromJson(json['Coordinates'] as Map<String, dynamic>),
+      json['Description'] as String,
     );
 
 Map<String, dynamic> _$ShopToJson(Shop instance) => <String, dynamic>{
@@ -24,20 +25,7 @@ Map<String, dynamic> _$ShopToJson(Shop instance) => <String, dynamic>{
       'Address': instance.address,
       'Coordinates':
           const CustomDoublePointJsonConverter().toJson(instance.coords),
-    };
-
-ShopInfo _$ShopInfoFromJson(Map<String, dynamic> json) => ShopInfo(
-      json['Description'] as String,
-      HolidayInfo.fromJson(json['Holidays'] as Map<String, dynamic>),
-      (json['Services'] as List<dynamic>)
-          .map((e) => Service.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
-Map<String, dynamic> _$ShopInfoToJson(ShopInfo instance) => <String, dynamic>{
       'Description': instance.description,
-      'Holidays': instance.holidays,
-      'Services': instance.services,
     };
 
 HolidayInfo _$HolidayInfoFromJson(Map<String, dynamic> json) => HolidayInfo();
