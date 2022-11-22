@@ -25,37 +25,33 @@ class _YourName extends State<YourName> {
         ),
         alignment: Alignment.center,
         child:
+
         Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+
         children: [
-          const SizedBox(height: 200,),
           TextField(decoration: InputDecoration(
-          hintText: 'Yourname',
-            hintStyle: TextStyle(fontSize: 30),
+          hintText: 'Укажите ваше имя',
+            hintStyle: Styles.text.AllocationText,
             fillColor: AppTheme.colors.blueButtoncolor,
             filled: true
           ),keyboardType: TextInputType.name,textAlign: TextAlign.center),
-          const SizedBox(height: 50,),
+          const SizedBox(height: 50),
         Container(
           height: 50,
           width: 500,
           color: AppTheme.colors.blueButtoncolor,
           child:Center(
             child:
-          Text('Yoursex',style: TextStyle(fontSize: 30),))),
+          Text('Укажите ваш пол',style: Styles.text.AllocationText,))),
 
     Container(
       height: 200,
       color: AppTheme.colors.blueButtoncolor,
       child:
           Row(
-
-
             mainAxisAlignment: MainAxisAlignment.center,
-
-
             children:  <Widget>[
-
-
             Expanded(
               child: IconButton(onPressed: (){}, icon: Image.asset("assets/icons/manIcon.png"),isSelected: false,)),
             Expanded(child: IconButton(onPressed: (){}, icon: Image.asset("assets/icons/womanIcon.png"), isSelected: true,))
@@ -65,14 +61,14 @@ class _YourName extends State<YourName> {
           TextField(decoration: InputDecoration(
 
               hintText: 'Укажите ваш город',
-              hintStyle: TextStyle(fontSize: 30,),
+              hintStyle: Styles.text.AllocationText,
               fillColor: AppTheme.colors.blueButtoncolor,
               filled: true
           ), keyboardType: TextInputType.name,textAlign: TextAlign.center),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Использовать',style: TextStyle(fontSize: 30,)),
+              Text('Использовать',style: Styles.text.InformationText),
               IconButton(onPressed: (){}, icon: Image.asset("assets/icons/geo.png",),isSelected: false,)
 
             ],
