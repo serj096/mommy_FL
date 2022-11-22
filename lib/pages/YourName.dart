@@ -30,21 +30,26 @@ class _YourName extends State<YourName> {
           mainAxisAlignment: MainAxisAlignment.center,
 
         children: [
+          Padding(padding: const EdgeInsets.only(left:8.0,right: 8.0),
+          child:
           TextField(decoration: InputDecoration(
           hintText: 'Укажите ваше имя',
             hintStyle: Styles.text.AllocationText,
             fillColor: AppTheme.colors.blueButtoncolor,
             filled: true
-          ),keyboardType: TextInputType.name,textAlign: TextAlign.center),
+          ),keyboardType: TextInputType.name,textAlign: TextAlign.center)),
           const SizedBox(height: 50),
+        Padding(padding: EdgeInsets.only(left: 8.0,right: 8.0),
+            child:
         Container(
           height: 50,
           width: 500,
           color: AppTheme.colors.blueButtoncolor,
           child:Center(
             child:
-          Text('Укажите ваш пол',style: Styles.text.AllocationText,))),
-
+          Text('Укажите ваш пол',style: Styles.text.AllocationText,)))),
+        Padding(padding:EdgeInsets.only(left: 8.0,right: 8.0),
+    child:
     Container(
       height: 200,
       color: AppTheme.colors.blueButtoncolor,
@@ -56,15 +61,17 @@ class _YourName extends State<YourName> {
               child: IconButton(onPressed: (){}, icon: Image.asset("assets/icons/manIcon.png"),isSelected: false,)),
             Expanded(child: IconButton(onPressed: (){}, icon: Image.asset("assets/icons/womanIcon.png"), isSelected: true,))
 
-          ],),),
+          ]))),
           const SizedBox(height: 50,),
+      Padding(padding:EdgeInsets.only(left: 8.0,right: 8.0),
+          child:
           TextField(decoration: InputDecoration(
 
               hintText: 'Укажите ваш город',
               hintStyle: Styles.text.AllocationText,
               fillColor: AppTheme.colors.blueButtoncolor,
               filled: true
-          ), keyboardType: TextInputType.name,textAlign: TextAlign.center),
+          ), keyboardType: TextInputType.name,textAlign: TextAlign.center)),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
