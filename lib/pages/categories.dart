@@ -12,6 +12,7 @@ class Categories extends StatelessWidget {
           end: Alignment.bottomRight,
           colors: [AppTheme.colors.homeOneColor,AppTheme.colors.homeSecondColor]
         )
+
       ),
     );
   }
