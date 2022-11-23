@@ -6,7 +6,8 @@ import '../models/index.dart';
 import 'dart:math';
 import 'coords.dart';
 
-class DummyDataService extends DataService {
+class DummyDataService extends DataService
+{
   DummyDataService() {
     userDataAccess = DummyUserDataService();
     categoryDataAccess = DummyCategoryDataService();
@@ -16,7 +17,8 @@ class DummyDataService extends DataService {
   }
 }
 
-class DummyUserDataService implements UserDataService {
+class DummyUserDataService implements UserDataService
+{
   late User user;
 
   DummyUserDataService() {
@@ -40,7 +42,8 @@ class DummyUserDataService implements UserDataService {
   Future<void> updateInfo(User user) async => this.user = user;
 }
 
-class DummyCategoryDataService implements CategoryDataService {
+class DummyCategoryDataService implements CategoryDataService
+{
   late List<Category> categories;
 
   DummyCategoryDataService() {
@@ -59,7 +62,8 @@ class DummyCategoryDataService implements CategoryDataService {
       Future<Category>.value(categories[id - 1]);
 }
 
-class DummyShopDataService implements ShopDataService {
+class DummyShopDataService implements ShopDataService
+{
   late List<Shop> shops;
   late List<List<Service>> services;
   late WeekSchedule weekSchedule;
@@ -187,6 +191,7 @@ class DummyShopDataService implements ShopDataService {
   @override
   Future<List<Shop>> getShops(
       int categoryId, Point<double> pt, double distance) async {
+
     var result = <Shop>[];
 
     for (var s in shops) {
@@ -194,6 +199,7 @@ class DummyShopDataService implements ShopDataService {
         if (sv.categoryId == categoryId) {
           var dist =
               Coords.getCoordsDistance(pt.x, pt.y, s.coords.x, s.coords.y);
+
           if (dist <= distance) {
             result.add(s);
             break;
@@ -256,6 +262,7 @@ class DummyShopDataService implements ShopDataService {
 }
 
 class DummyOrderDataService implements OrderDataService {
+
   late List<Order> currentOrders;
   late List<Order> ordersHistory;
 
@@ -279,6 +286,7 @@ class DummyOrderDataService implements OrderDataService {
   Future<List<Order>> getCurrentOrders() =>
       Future<List<Order>>.value(currentOrders);
 
+
   @override
   Future<List<Order>> getOrdersHistory(int fromId) {
     throw UnimplementedError();
@@ -289,6 +297,7 @@ class DummyOrderDataService implements OrderDataService {
 }
 
 class DummyAuthenticationService implements AuthenticationService {
+
   @override
   Future<void> getCode(String phone) {
     return Future.value();

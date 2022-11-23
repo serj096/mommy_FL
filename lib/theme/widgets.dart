@@ -12,7 +12,7 @@ class DefaultWidgets{
     var width = MediaQuery.of(context).size.width;
     bool needLight = insideWidgets.length > 0;
     return Container(
-        width: width * 0.85,
+        width: width * 0.75,
         decoration: needLight? BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -20,9 +20,7 @@ class DefaultWidgets{
               blurRadius: 5,
               spreadRadius: 5,
               offset: Offset(0, 0),
-            )
-          ],
-        ) : null,
+            )]) : null,
         child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: ExpansionTile
@@ -31,7 +29,7 @@ class DefaultWidgets{
               style: needLight? Styles.text.LightButtonText : Styles.text.ButtonText),
             trailing: GetArrowIcon( arrowDirection.down),
             collapsedBackgroundColor: Color.fromRGBO(76, 74, 157,1),
-            backgroundColor: Colors.teal,
+            backgroundColor: Color.fromRGBO(76, 74, 157,1),
             children: [ ListView.separated(
                 separatorBuilder: (BuildContext bc, int index) => Divider(),
                 shrinkWrap: true,
@@ -59,21 +57,18 @@ class DefaultWidgets{
   Widget GetDefaultButton( BuildContext context, buttonTitle, Function() func )
   {
     var width = MediaQuery.of(context).size.width;
-    return ElevatedButton(
+    return Container(
+        height: 50,
+        width: width * 0.75,
+        child: ElevatedButton(
         onPressed: func,
         style: Styles.DefaultButtonStyle,
-        child: Container(
-          height: 50,
-          width: width * 0.75,
-          child: Row(
+        child:  Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(buttonTitle, style: Styles.text.ButtonText),
               GetArrowIcon(arrowDirection.right)
-            ],
-          ),
-        )
-    );
+            ])));
   }
 
   PreferredSizeWidget GetDefaultAppBar(BuildContext context, bool showMoney, String appBarTitle)
@@ -90,14 +85,15 @@ class DefaultWidgets{
   }
 
   Widget GetCircleAvatar(BuildContext context, circleAwatarSize size){
+    var width = MediaQuery.of(context).size.height;
     return GestureDetector(
         onTap: (){ size == circleAwatarSize.small? Navigator.pushNamed(context, '/') : null;},
         child: CircleAvatar(
             backgroundColor: Colors.white,
-            radius: size == circleAwatarSize.big? 55 : 27,
+            radius: size == circleAwatarSize.big? width / 10 : 23,
             child: CircleAvatar(
                 backgroundColor: Color.fromRGBO(76, 74, 157,1),
-                radius: size == circleAwatarSize.big? 50 : 22,
+                radius: size == circleAwatarSize.big? width / 10.1 : 20,
                 child: Text(UserInfo().GetName()[0], style: GetCircleAvatarTextStyle(size) )
             )));
   }
@@ -109,7 +105,5 @@ class DefaultWidgets{
         fontSize: size == circleAwatarSize.big? 45: 15
     );
   }
-
-
   const DefaultWidgets();
 }
