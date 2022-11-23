@@ -7,11 +7,11 @@ class Category
 {
   @JsonKey(name: 'Id')
   @JsonKey(required: true)
-  late int id;
+  final int id;
 
   @JsonKey(name: 'Name')
   @JsonKey(required: true)
-  late String? name;
+  final String name;
 
   Category(this.id, this.name);
 

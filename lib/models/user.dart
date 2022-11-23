@@ -7,35 +7,35 @@ class User
 {
   @JsonKey(name: 'Phone')
   @JsonKey(required: true)
-  late final String phone;
+  final String phone;
 
   @JsonKey(name: 'FirstName')
   @JsonKey(required: true)
-  late String firstName;
+  String firstName;
 
   @JsonKey(name: 'SurName')
   @JsonKey(required: false)
   @JsonKey(defaultValue: "")
-  late String surName;
+  String surName;
 
   @JsonKey(name: 'Patronymic')
   @JsonKey(required: false)
   @JsonKey(defaultValue: "")
-  late String patronymic;
+  String patronymic;
 
   @JsonKey(name: 'IsWoman')
   @JsonKey(required: true)
-  late bool isWoman;
+  bool isWoman;
 
   @JsonKey(name: 'City')
   @JsonKey(required: false)
   @JsonKey(defaultValue: "")
-  late String city;
+  String city;
 
   @JsonKey(name: 'Address')
   @JsonKey(required: false)
   @JsonKey(defaultValue: "")
-  late String address;
+  String address;
 
   User(this.phone, this.firstName, this.surName, this.patronymic, this.isWoman, this.city, this.address);
 
@@ -43,5 +43,21 @@ class User
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
 
-  String firstLetter() => firstName.substring(0,1);
+  String firstLetter() => firstName[0].toUpperCase();
+
+  String fullName() {
+    String result = "";
+
+    if (surName != "") {
+      result += "$surName ";
+    }
+
+    result += firstName;
+
+    if (patronymic != "") {
+      result += " $patronymic";
+    }
+
+    return result;
+  }
 }

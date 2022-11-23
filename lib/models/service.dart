@@ -7,23 +7,23 @@ class Service
 {
   @JsonKey(name: "Id")
   @JsonKey(required: true)
-  late int id;
+  final int id;
 
   @JsonKey(name: 'CategoryId')
   @JsonKey(required: true)
-  late int categoryId;
+  final int categoryId;
 
   @JsonKey(name: 'Name')
   @JsonKey(required: true)
-  late String name;
+  String name;
 
   @JsonKey(name: 'Description')
   @JsonKey(required: true)
-  late String description;
+  String description;
 
   @JsonKey(name: 'Price')
   @JsonKey(required: true)
-  late int price;
+  int price;
 
   Service(this.id, this.categoryId, this.name, this.description, this.price);
 
