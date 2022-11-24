@@ -27,8 +27,3 @@ Map<String, dynamic> _$ShopToJson(Shop instance) => <String, dynamic>{
           const CustomDoublePointJsonConverter().toJson(instance.coords),
       'Description': instance.description,
     };
-
-HolidayInfo _$HolidayInfoFromJson(Map<String, dynamic> json) => HolidayInfo();
-
-Map<String, dynamic> _$HolidayInfoToJson(HolidayInfo instance) =>
-    <String, dynamic>{};

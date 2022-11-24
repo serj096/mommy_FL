@@ -28,7 +28,8 @@ abstract class ShopDataService
   Future<Shop> getShop(int shopId);
   Future<List<Service>> getServices(int shopId);
   Future<Service> getService(int shopId, int serviceId);
-  Future<HolidayInfo> getHolidays(int shopId);
+  Future<WeekSchedule> getWeekSchedule(int shopId);
+  Future<MonthSchedule> getMonthSchedule(int shopId, DateTime month);
 }
 
 abstract class OrderDataService

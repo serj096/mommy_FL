@@ -7,27 +7,27 @@ class Order
 {
   @JsonKey(name: 'ShopId')
   @JsonKey(required: true)
-  late int shopId;
+  final int shopId;
 
   @JsonKey(required: true)
   @JsonKey(name: 'PayType')
-  late Payment payType;
+  Payment payType;
 
   @JsonKey(name: 'IsCompleted')
   @JsonKey(required: true)
-  late bool isCompleted;
+  bool isCompleted;
 
   @JsonKey(name: 'Time')
   @JsonKey(required: true)
-  late DateTime time;
+  DateTime time;
 
   @JsonKey(name: 'Location')
   @JsonKey(required: true)
-  late Place location;
+  Place location;
 
   @JsonKey(name: 'Services')
   @JsonKey(required: true)
-  late List<int> services;
+  List<int> services;
 
   Order(this.shopId, this.payType, this.isCompleted, this.time, this.location, this.services);
 

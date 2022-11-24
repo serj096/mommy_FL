@@ -9,32 +9,32 @@ class Shop
 {
   @JsonKey(name: 'Id')
   @JsonKey(required: true)
-  late int id;
+  final int id;
 
   @JsonKey(name: 'Name')
   @JsonKey(required: true)
-  late String name;
+  String name;
 
   @JsonKey(name: 'Rating')
   @JsonKey(required: true)
-  late int rating;
+  int rating;
 
   @JsonKey(name: 'City')
   @JsonKey(required: true)
-  late String city;
+  String city;
 
   @JsonKey(name: 'Address')
   @JsonKey(required: true)
-  late String address;
+  String address;
 
   @JsonKey(name: 'Coordinates')
   @JsonKey(required: true)
   @CustomDoublePointJsonConverter()
-  late Point<double> coords;
+  Point<double> coords;
 
   @JsonKey(name: 'Description')
   @JsonKey(required: true)
-  late String description;
+  String description;
 
   Shop(this.id, this.name, this.rating, this.city, this.address, this.coords, this.description);
 
@@ -48,15 +48,4 @@ class ShopInfo
   // todo
   // WorkPhoto
   // Certificates
-}
-
-@JsonSerializable()
-class HolidayInfo
-{
-  // todo
-  HolidayInfo();
-
-  factory HolidayInfo.fromJson(Map<String, dynamic> json) => _$HolidayInfoFromJson(json);
-
-  Map<String, dynamic> toJson() => _$HolidayInfoToJson(this);
 }
