@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:mommy/data_access/data_accessor.dart';
 
+import '../models/index.dart';
 import '../theme/styles.dart';
 
 class MapOur extends StatefulWidget {
@@ -12,16 +14,31 @@ class MapOur extends StatefulWidget {
 }
 
 class _MapOurState extends State<MapOur> {
-  final MapController mapController = MapController();
+  late final MapController mapController = MapController();
+  late MarkerLayer markerLayer = const MarkerLayer();
+  late LatLng _loadCenter;
+  final double _loadDistance = 5;
+  final Distance _calculator = const Distance();
+  double _posChange = 0.0;
+  late List<Marker> _markers;
+
+  @override
+  void initState() {
+    super.initState();
+    _markers = <Marker>[];
+  }
 
   @override
   Widget build(BuildContext context) {
+    _loadCenter = LatLng(59.92908, 30.32524);
+
     return Scaffold(
         appBar: Styles.widgets.GetDefaultAppBar(context, false, "Категории"),
         body: FlutterMap(
           mapController: mapController,
           options: MapOptions(
-            center: LatLng(55.7522, 37.6156),
+            onPositionChanged: refreshMarkers,
+            center: _loadCenter,
             zoom: 13,
             maxZoom: 18,
             minZoom: 5,
@@ -32,25 +49,44 @@ class _MapOurState extends State<MapOur> {
               //urlTemplate: 'https://b.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
               userAgentPackageName: 'com.example.app',
             ),
-            MarkerLayer(
-              markers: [
-                Marker(
-                  point: LatLng(55.7522, 37.6156),
-                  width: 50,
-                  height: 50,
-                  builder: (context) => IconButton(
-                      onPressed: () =>
-                          mapController.move(LatLng(55.7922, 37.9156), 19),
-                      icon: const Icon(
-                        Icons.favorite,
-                        color: Colors.pink,
-                        size: 50,
-                        semanticLabel: 'Пиздатый магаз',
-                      )),
-                )
-              ],
-            )
+            MarkerLayer(markers: _markers,)
           ],
         ));
+  }
+
+  void refreshMarkers(MapPosition mapPosition, bool hasGesture) async {
+    if (mapPosition.center == null) {
+      return;
+    }
+
+    LatLng center = mapPosition.center!;
+
+    _posChange = _calculator.as(LengthUnit.Kilometer, _loadCenter, center);
+
+    if (_posChange < _loadDistance) {
+      return;
+    }
+
+    _posChange = 0.0;
+    _loadCenter = center;
+
+    if (_markers.isNotEmpty) {
+      _markers.clear();
+    }
+
+    if (mapPosition.center != null) {
+      List<Shop> shops = await DataAccessor.instance.shopDataAccess.getShops(1, center, 5);
+      print("${shops.length} found this area");
+      for (Shop s in shops) {
+        _markers.add(
+            Marker(
+                point: s.coords,
+                width: 50,
+                height: 50,
+                builder: (context) => const Icon(Icons.face, color: Colors.pink, size: 50)
+            )
+        );
+      }
+    }
   }
 }

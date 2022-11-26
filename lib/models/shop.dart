@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'converters.dart';
-import 'dart:math';
+import 'package:latlong2/latlong.dart';
 
 part 'shop.g.dart';
 
@@ -30,7 +30,7 @@ class Shop
   @JsonKey(name: 'Coordinates')
   @JsonKey(required: true)
   @CustomDoublePointJsonConverter()
-  Point<double> coords;
+  LatLng coords;
 
   @JsonKey(name: 'Description')
   @JsonKey(required: true)

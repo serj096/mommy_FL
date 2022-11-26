@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mommy/models/schedule.dart';
+import 'package:latlong2/latlong.dart';
 
 import 'data_service.dart';
 import '../models/index.dart';
-import 'dart:math';
-import 'coords.dart';
 
 class DummyDataService extends DataService
 {
@@ -68,6 +66,7 @@ class DummyShopDataService implements ShopDataService
   late List<List<Service>> services;
   late WeekSchedule weekSchedule;
   late MonthSchedule monthSchedule;
+  final Distance calculator = const Distance();
 
   DummyShopDataService() {
     shops = <Shop>[];
@@ -75,7 +74,7 @@ class DummyShopDataService implements ShopDataService
 
     // First shop
     shops.add(Shop(1, "У Клуши", 5, "Санкт-Петербург", "Садовая улица 38",
-        const Point(59.92805, 30.32166), "Сервис заебумба - отвечаю"));
+        LatLng(59.92805, 30.32166), "Сервис заебумба - отвечаю"));
 
     // First shop services
     services.add(<Service>[
@@ -91,7 +90,7 @@ class DummyShopDataService implements ShopDataService
 
     // Second shop
     shops.add(Shop(1, "Мастер Олег", 5, "Санкт-Петербург", "Гороховая улица 36",
-        const Point(59.92807, 30.32302), "Дядя Олег позаботится о тебе"));
+        LatLng(59.92807, 30.32302), "Дядя Олег позаботится о тебе"));
 
     // Second shop services
     services.add(<Service>[
@@ -107,7 +106,7 @@ class DummyShopDataService implements ShopDataService
 
     // Third shop
     shops.add(Shop(1, "Топ услуги", 5, "Санкт-Петербург", "Апраксин переулок 4",
-        const Point(59.92908, 30.32524), "Лучшие во дворе"));
+        LatLng(59.92908, 30.32524), "Лучшие во дворе"));
 
     // Third shop services
     services.add(<Service>[
@@ -190,15 +189,14 @@ class DummyShopDataService implements ShopDataService
 
   @override
   Future<List<Shop>> getShops(
-      int categoryId, Point<double> pt, double distance) async {
+      int categoryId, LatLng coords, double distance) async {
 
     var result = <Shop>[];
 
     for (var s in shops) {
       for (var sv in (await getServices(s.id))) {
         if (sv.categoryId == categoryId) {
-          var dist =
-              Coords.getCoordsDistance(pt.x, pt.y, s.coords.x, s.coords.y);
+          var dist = calculator.as(LengthUnit.Kilometer, coords, s.coords);
 
           if (dist <= distance) {
             result.add(s);
