@@ -1,5 +1,5 @@
-import 'dart:math';
 import '../models/index.dart';
+import 'package:latlong2/latlong.dart';
 
 abstract class DataService
 {
@@ -24,7 +24,7 @@ abstract class CategoryDataService
 
 abstract class ShopDataService
 {
-  Future<List<Shop>> getShops(int categoryId, Point<double> pt, double distance);
+  Future<List<Shop>> getShops(int categoryId, LatLng coords, double distance);
   Future<Shop> getShop(int shopId);
   Future<List<Service>> getServices(int shopId);
   Future<Service> getService(int shopId, int serviceId);
