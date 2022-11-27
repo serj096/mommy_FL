@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../theme/app_theme.dart';
 import '../theme/styles.dart';
-class YourName extends StatefulWidget {
-  const YourName({Key? key}) : super(key: key);
+class Registration extends StatefulWidget {
+  const Registration({Key? key}) : super(key: key);
 
   @override
-  State<YourName> createState() => _YourName();
+  State<Registration> createState() => _Registration();
 }
 
-class _YourName extends State<YourName> {
+class _Registration extends State<Registration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
