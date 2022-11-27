@@ -136,44 +136,62 @@ Widget getWid(Order order) {
         // Async method error handling
 
         Shop shop = snapshot.data!.shop;
-        List<Service> services = snapshot.data!.services;
+        var children = <Widget>[];
+        int servicesSum = 0;
+        snapshot.data!.services.forEach((element) {
+          children.add(Text(element.name, style: Styles.text.CommonText));
+          servicesSum += element.price;
+        });
 
-        String strServices = "";
-        if (services.isNotEmpty) {
-          strServices += services[0].name;
-          for (int i = 1; i < services.length; i++) {
-            strServices += ", ${services[i].name}";
-          }
-        }
 
-        return Card(
+        return Container(
+          margin: EdgeInsets.only(left: 7, right: 7),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(6)),
+            border: Border.all(
+              color: Color.fromRGBO(251, 149, 251,1),
+            width: 3)),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              ListTile(
-                leading: Text(shop.name),
-                title: Text(strServices),
-                subtitle: Text(shop.description),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  TextButton(
-                    child: const Text('Связаться со специалистом'),
-                    onPressed: () {
-                      /* ... */
-                    },
-                  ),
-                  const SizedBox(width: 8),
-                  TextButton(
-                    child: const Text('Отменить запись'),
-                    onPressed: () {
-                      /* ... */
-                    },
-                  ),
-                  const SizedBox(width: 8),
-                ],
-              ),
+            children: [
+              Container(
+                padding: EdgeInsets.only(left: 3, right: 3, top: 3),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: children,
+                    ),
+                    Column(children: [
+                      Text('${servicesSum}руб.', style: TextStyle(color: Colors.white, fontSize: 16, fontFamily: "Tenor")),
+                      Text('оплачено', style: Styles.text.PaymentInfo, selectionColor: Colors.white,)
+                    ],)])),
+              Container(
+                padding: EdgeInsets.only(left: 3, right: 3, top: 3),
+                alignment: Alignment.centerLeft,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Дата и время', style: Styles.text.CommonText),
+                    Text('${shop.address}',style: Styles.text.CommonText),
+                  ])),
+              Container(
+                padding: EdgeInsets.all(3),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                      onPressed: (){},
+                      child: Text('Детали заказа', style: Styles.text.CommonText),
+                      style: ButtonStyle(
+                        alignment: Alignment.center,
+                        backgroundColor: MaterialStatePropertyAll<Color>(Color.fromRGBO(100, 100, 200,1))
+                      ),
+                    )
+                  ],
+                ),
+              )
             ],
           ),
         );

@@ -188,6 +188,11 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+    fonts:
+      - family: Tenor
+        fonts:
+          - asset: assets/fonts/Tenor.ttf
+            weight: 700
   flutter_lints:
     dependency: "direct dev"
     description:

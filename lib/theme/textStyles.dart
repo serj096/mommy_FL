@@ -6,6 +6,15 @@ class TextStyles{
       color: Colors.white,
       fontSize: 45
   );
+  final CommonText = const TextStyle(
+      color: Colors.white,
+      fontFamily: "Tenor",
+      fontSize: 13
+  );
+  final PaymentInfo = const TextStyle(
+    color: Colors.green,
+    fontSize: 11
+  );
   final InformationText = const TextStyle(
       color: Color.fromRGBO(177, 175, 250, 1),
       fontSize: 16
