@@ -10,12 +10,12 @@ void main()=> runApp(MaterialApp(
   theme: ThemeData(
     primaryColor: Colors.deepPurple,
   ),
-  initialRoute: '/',
+  initialRoute: '/registration',
   routes: {
     '/':(context)=>Home(),
     '/login':(context)=>Login(),
     '/categories':(context)=>Categories(),
-    '/Registration':(context)=>Registration(),
+    '/registration':(context)=>Registration(),
     '/map':(context)=>MapOur(),
     '/mySpec':(context)=>MySpec(),
 

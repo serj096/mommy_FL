@@ -70,6 +70,18 @@ class DefaultWidgets{
               GetArrowIcon(arrowDirection.right)
             ])));
   }
+  Widget GetDefaultTextField(BuildContext context,hintText ){
+    var width = MediaQuery.of(context).size.width;
+    return Container(
+        height: 50,
+        width: width * 0.75,
+        child:TextField(decoration: InputDecoration(
+        hintText: hintText,
+        hintStyle: TextStyle(fontSize: 30),
+        fillColor: AppTheme.colors.blueButtoncolor,
+        filled: true
+    ),keyboardType: TextInputType.name,textAlign: TextAlign.center));
+  }
 
   PreferredSizeWidget GetDefaultAppBar(BuildContext context, bool showMoney, String appBarTitle)
   {
